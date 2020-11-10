@@ -1,8 +1,12 @@
-public class User {
-    private String _id;
-    private Name name;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public User(String _id, Name name) {
+public class User {
+    public String _id;
+    public Name name;
+
+    public User(
+            @JsonProperty("_id") String _id,
+            @JsonProperty("name") Name name) {
         this._id = _id;
         this.name = name;
     }

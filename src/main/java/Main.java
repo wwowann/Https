@@ -10,11 +10,11 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static final String url = "https://cat-fact.herokuapp.com/facts";
     public static final ObjectMapper mapper = new ObjectMapper();
+
     public static void main(String[] args) throws IOException {
 
         CloseableHttpClient httpClient = HttpClientBuilder.create()
@@ -28,12 +28,13 @@ public class Main {
         HttpGet request = new HttpGet(url);
         request.setHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.getMimeType());
         CloseableHttpResponse response = httpClient.execute(request);
-        Arrays.stream(response.getAllHeaders()).forEach(System.out::println);
+        //вывод полученных заголовков
+//        Arrays.stream(response.getAllHeaders()).forEach(System.out::println);
         //преобразование json в JavaObject
-        List<JsonInJavaObject> javaObjectsList = mapper.readValue(response.getEntity().getContent(),
-                new TypeReference<List<JsonInJavaObject>>() {});
-        javaObjectsList.stream().filter(value -> value.getUpvotes() > 0)
-        .forEach(System.out::println);
-//        javaObjectsList.forEach(System.out::println);
+        AllClass allClasses = mapper.readValue(response.getEntity().getContent(),
+                new TypeReference<AllClass>() {
+                });
+        allClasses.all.stream().filter(value -> value.getUpvotes() == 0)
+                .forEach(System.out::println);
     }
 }
