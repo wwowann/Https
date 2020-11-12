@@ -9,7 +9,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 public class Main {
     public static final String url = "https://cat-fact.herokuapp.com/facts";
@@ -28,8 +27,6 @@ public class Main {
         HttpGet request = new HttpGet(url);
         request.setHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.getMimeType());
         CloseableHttpResponse response = httpClient.execute(request);
-        //вывод полученных заголовков
-//        Arrays.stream(response.getAllHeaders()).forEach(System.out::println);
         //преобразование json в JavaObject
         AllClass allClasses = mapper.readValue(response.getEntity().getContent(),
                 new TypeReference<AllClass>() {
