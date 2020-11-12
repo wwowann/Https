@@ -27,7 +27,7 @@ public class Main {
         HttpGet request = new HttpGet(url);
         request.setHeader(HttpHeaders.ACCEPT, ContentType.APPLICATION_JSON.getMimeType());
         CloseableHttpResponse response = httpClient.execute(request);
-        //преобразование json в JavaObject
+
         AllClass allClasses = mapper.readValue(response.getEntity().getContent(),
                 new TypeReference<AllClass>() {
                 });
